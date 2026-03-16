@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import static frc.robot.Constants.OperatorConstants.*;
@@ -29,7 +30,6 @@ public class RobotContainer {
 
   // The driver's controller
   private final CommandPS5Controller driverController = new CommandPS5Controller(DRIVER_CONTROLLER_PORT);
-  private final CommandPS5Controller operatorController = new CommandPS5Controller(OPERATOR_CONTROLLER_PORT);
 
   // The autonomous chooser
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
@@ -60,17 +60,24 @@ public class RobotContainer {
   private void configureBindings() {
 
     // While the left bumper on operator controller is held, intake Fuel
-    operatorController.L1()
+    driverController.L2()
         .whileTrue(ballSubsystem.runEnd(() -> ballSubsystem.intake(), () -> ballSubsystem.stop()));
     // While the right bumper on the operator controller is held, spin up for 1
     // second, then launch fuel. When the button is released, stop.
-    operatorController.R1()
+    
+    driverController.R2()
         .whileTrue(ballSubsystem.spinUpCommand().withTimeout(SPIN_UP_SECONDS)
             .andThen(ballSubsystem.launchCommand())
             .finallyDo(() -> ballSubsystem.stop()));
+    
+    /*operatorController.R2().whileTrue(ballSubsystem.runEnd(
+        () -> ballSubsystem.launch(),
+        () -> ballSubsystem.stop()
+    ));*/
+
     // While the A button is held on the operator controller, eject fuel back out
     // the intake
-    operatorController.cross()
+    driverController.cross()
         .whileTrue(ballSubsystem.runEnd(() -> ballSubsystem.eject(), () -> ballSubsystem.stop()));
 
     // Set the default command for the drive subsystem to the command provided by

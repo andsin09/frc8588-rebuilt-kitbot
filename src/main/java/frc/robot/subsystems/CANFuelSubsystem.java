@@ -22,8 +22,8 @@ public class CANFuelSubsystem extends SubsystemBase {
   /** Creates a new CANBallSubsystem. */
   public CANFuelSubsystem() {
     // create brushed motors for each of the motors on the launcher mechanism
-    intakeLauncherRoller = new SparkMax(INTAKE_LAUNCHER_MOTOR_ID, MotorType.kBrushed);
-    feederRoller = new SparkMax(FEEDER_MOTOR_ID, MotorType.kBrushed);
+    intakeLauncherRoller = new SparkMax(INTAKE_LAUNCHER_MOTOR_ID, MotorType.kBrushless);
+    feederRoller = new SparkMax(FEEDER_MOTOR_ID, MotorType.kBrushless);
 
     // put default values for various fuel operations onto the dashboard
     // all methods in this subsystem pull their values from the dashbaord to allow
@@ -52,6 +52,7 @@ public class CANFuelSubsystem extends SubsystemBase {
 
   // A method to set the rollers to values for intaking
   public void intake() {
+    System.out.println("INTAKE CALLED");
     feederRoller.setVoltage(SmartDashboard.getNumber("Intaking feeder roller value", INTAKING_FEEDER_VOLTAGE));
     intakeLauncherRoller
         .setVoltage(SmartDashboard.getNumber("Intaking intake roller value", INTAKING_INTAKE_VOLTAGE));
@@ -82,6 +83,7 @@ public class CANFuelSubsystem extends SubsystemBase {
   // A method to spin up the launcher roller while spinning the feeder roller to
   // push Fuel away from the launcher
   public void spinUp() {
+    System.out.println("SPINUP CALLED");
     feederRoller
         .setVoltage(SmartDashboard.getNumber("Spin-up feeder roller value", SPIN_UP_FEEDER_VOLTAGE));
     intakeLauncherRoller

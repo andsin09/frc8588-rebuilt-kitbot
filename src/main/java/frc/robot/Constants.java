@@ -29,8 +29,8 @@ public final class Constants {
 
   public static final class FuelConstants {
     // Motor controller IDs for Fuel Mechanism motors
-    public static final int FEEDER_MOTOR_ID = 9;
-    public static final int INTAKE_LAUNCHER_MOTOR_ID = 4;
+    public static final int FEEDER_MOTOR_ID = 4;
+    public static final int INTAKE_LAUNCHER_MOTOR_ID = 9;
 
     // Current limit and nominal voltage for fuel mechanism motors.
     public static final int FEEDER_MOTOR_CURRENT_LIMIT = 60;
@@ -51,7 +51,7 @@ public final class Constants {
     // Port constants for driver and operator controllers. These should match the
     // values in the Joystick tab of the Driver Station software
     public static final int DRIVER_CONTROLLER_PORT = 0;
-    public static final int OPERATOR_CONTROLLER_PORT = 1;
+    public static final int OPERATOR_CONTROLLER_PORT = 0;
 
     // This value is multiplied by the joystick value when driving the robot to
     // help avoid driving and turning too fast and being difficult to control
